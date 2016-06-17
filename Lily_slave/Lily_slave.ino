@@ -1,9 +1,10 @@
 /*
   PIXI by Werccollective.com
  programming: olav@werccollective.com, herman@kopinga.nl
- 
- Updates on: https://github.com/HermanKopinga/Buren/
- Update 23 feb 2016 
+
+ Updates on: https://github.com/Valoa/lily 
+ Old version on: https://github.com/HermanKopinga/Buren/
+ Update 17 june 2016 
  Hardware:
  - AVR Atmega328p @1MHz (internal oscillator)
  - nrf24l01 wireless modules
@@ -53,6 +54,7 @@
 //#define DEBUGSLEEP
 #define DEBUGSEND
 #define DEBUGRECEIVE
+//#define CRICKET
 
 // PIXI dust
 #define PAYLOAD_SIZE 15
@@ -91,7 +93,11 @@ byte blue = 0;
 //
 const int buttonPin = A1; // Button for triggering sends
 const int ldrPin = A5; // 
-const int speakerPin = 5; // speaker pin is located underneath the atmega
+//const int speakerPin = 5; // speaker pin is located underneath the atmega
+const int powerled = 5; // used to be the speaker pin now controlls powerled pwm
+const int alarmPin = A3; // internal pullup pin, goes low on lipo alarm
+
+
 #define NUMPIXELS 3 // Number of LEDs in strip
 // Here's how to control the LEDs from any two pins:
 #define DATAPIN    4
@@ -162,7 +168,7 @@ void setup(void){
   Serial.println("PIXI started");
 
   pinMode(buttonPin, INPUT_PULLUP);
-  pinMode(speakerPin, OUTPUT);
+ // pinMode(speakerPin, OUTPUT);
   pinMode(ldrPin, INPUT);
 
   // Let the user know we are started by doing a led marquee.
