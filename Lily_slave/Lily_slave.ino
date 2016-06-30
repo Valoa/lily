@@ -93,8 +93,8 @@ byte blue = 0;
 //
 const int buttonPin = A1; // Button for triggering sends
 const int ldrPin = A5; // 
-//const int speakerPin = 5; // speaker pin is located underneath the atmega
-const int powerled = 5; // used to be the speaker pin now controlls powerled pwm
+const int speakerPin = 5; // speaker pin is located underneath the atmega
+//const int powerled = 5; // used to be the speaker pin now controlls powerled pwm
 const int alarmPin = A3; // internal pullup pin, goes low on lipo alarm
 
 
