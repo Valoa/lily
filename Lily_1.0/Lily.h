@@ -23,7 +23,7 @@ void sleepAnimation();
 void wakeAnimation();
 
 bool transmitter();
-
+bool iHavePowerled();
 #endif
 
 
