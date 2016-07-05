@@ -261,3 +261,6 @@ void sleepAnimation() {
 bool transmitter() {
   return 0;
 }
+bool iHavePowerled() {
+  return 0;
+}

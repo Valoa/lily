@@ -774,6 +774,7 @@ bool checkBatteryAlarm() {
 
 
 void alarmStatus() {
+  if (iHavePowerled()){ // chek if they have a powerled
   byte r, g, b;
   r = checkBatteryAlarm() * 255;
   g = 255 - checkBatteryAlarm() * 255;
@@ -782,7 +783,10 @@ void alarmStatus() {
   for (int i = 255; i > 0; i -= 5)  makeColor(r * i / 255, g * i / 255, b * i / 255);
   makeColor(0, 0, 0);
 }
-
+else{
+   makeColor(0, 0, 0);
+}
+}
 
 
 unsigned long actualMillis() {
