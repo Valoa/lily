@@ -156,7 +156,7 @@ byte fadeState = waitingForPackage;
 #define ALWAYSPOWERLED 8
 
 void setup(void) {
-  TCCR0B = (TCCR0B & 0b11111000) | 1;
+  TCCR0B = (TCCR0B & 0b11111000) | 1; // set pwm speed
   Serial.begin(9600);
   Serial.println("Lily started");
   config_NRF();
@@ -263,14 +263,14 @@ void loop(void) {
 
 void transmitChanceChange() {
   buffer[0] = CHANGECHANCES;
-  buffer[1] = 127; //Chances in x/255
-  buffer[2] = 127;
-  buffer[3] = 127;
-  buffer[4] = 127;
-  buffer[5] = 127;
-  buffer[6] = 127;
-  buffer[7] = 127;
-  buffer[8] = 127;
+  buffer[1] = 127; //Chances in x/255 //random fade pack
+  buffer[2] = 127;        //Burst pack
+  buffer[3] = 127;        // fast blinky
+  buffer[4] = 127;        // slow full fade
+  buffer[5] = 127;        // chase1
+  buffer[6] = 127;        // chase3
+  buffer[7] = 127;        //feedback fade
+  buffer[8] = 127;        // lake glider
   Mirf.send((byte *)&buffer);
   while (Mirf.isSending());
 }
@@ -389,7 +389,7 @@ void pickPackageTypeToSend() {
 void sendSlowFullFade() {
   //Packet settings
   packageType = STARTFADE;
-  powerLedBit = 1;
+  powerLedBit = (int)random(2); // 1 or 0 50%chance
   ledBit = 1;
   interruptingBit = 0;
   ignoreChance = 63; //package drop
@@ -424,13 +424,13 @@ void sendSlowFullFade() {
 void sendRandomFadePackage() {
   //Packet settings
   packageType = STARTFADE;
-  powerLedBit = 1;
+  powerLedBit = (int)random(2);;
   ledBit = 1;
   interruptingBit = 0;
   ignoreChance = 0;
 
   //Colour settings
-  hue = 85;//random(0, 256);
+  hue = 0;//random(0, 256);
   colorShift = 2;
   saturation = random(127, 255);
 
@@ -523,6 +523,11 @@ void sendFastBlinkyWhite() {
   fadeStartTime = actualMillis();
   sentMessage = 0;
 }
+
+
+
+
+
 
 ///////////////////////////////////////////packet///////////////////////////////////////////
 

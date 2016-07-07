@@ -1,4 +1,4 @@
-#include "Lily.h"
+ #include "Lily.h"
 #include <avr/sleep.h> // For sleeping.
 #include <avr/power.h> // For sleeping.
 #include <avr/wdt.h> // For sleeping.
@@ -258,6 +258,11 @@ void sleepAnimation() {
 
 
 
+
 bool transmitter() {
+  return 1;
+}
+bool iHavePowerled() {
   return 0;
 }
+

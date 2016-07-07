@@ -177,8 +177,8 @@ void setup(void) {
 
 
 void loop(void) {
-  //transmitIdleTimeChange();
-  //transmitChanceChange();
+  transmitIdleTimeChange();
+  transmitChanceChange();
   if (actualMillis() - checkedLDRTime >= 1000) {
     checkedLDRTime = actualMillis();
     doSleepStuff();
@@ -265,14 +265,14 @@ void loop(void) {
 
 void transmitChanceChange() { // send changes to masters
   buffer[0] = CHANGECHANCES;
-  buffer[1] = 0; //Chances in x/255
-  buffer[2] = 0;
-  buffer[3] = 255;
-  buffer[4] = 0;
-  buffer[5] = 0;
-  buffer[6] = 0;
-  buffer[7] = 0;
-  buffer[8] = 0;
+  buffer[1] = 0; //Chances in x/255 //random fade pack
+  buffer[2] = 0;        //Burst pack
+  buffer[3] = 255;        // fast blinky
+  buffer[4] = 0;        // slow full fade
+  buffer[5] = 0;        // chase1
+  buffer[6] = 0;        // chase3
+  buffer[7] = 0;        //feedback fade
+  buffer[8] = 0;        // lake glider  
   Mirf.send((byte *)&buffer);
   while (Mirf.isSending());
 }
